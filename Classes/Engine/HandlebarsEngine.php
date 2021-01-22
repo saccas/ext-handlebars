@@ -31,6 +31,7 @@ use JFB\Handlebars\DataProvider\DataProviderInterface;
 use JFB\Handlebars\HelperRegistry;
 use LightnCandy\LightnCandy;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -84,16 +85,16 @@ class HandlebarsEngine
      *
      * @param $settings array
      */
-    public function __construct($settings)
+    public function __construct(array $settings)
     {
-        $this->settings = $settings;
+        $this->settings = $settings ?: [];
         $this->extensionKey = $settings['extensionKey'];
         $this->controllerName = $settings['controllerName'];
         $this->actionName = $settings['actionName'];
         $this->templatePath = $settings['templatePath'];
-        $this->dataProviders = $settings['dataProviders'];
-        $this->additionalData = $settings['additionalData'];
-        $this->tempPath = PATH_site . $settings['tempPath'];
+        $this->dataProviders = $settings['dataProviders'] ?: [];
+        $this->additionalData = $settings['additionalData'] ?: [];
+        $this->tempPath = Environment::getPublicPath() . '/' . $settings['tempPath'];
     }
 
     /**
@@ -119,6 +120,10 @@ class HandlebarsEngine
             /** @var DataProviderInterface $dataProvider */
             $dataProvider = GeneralUtility::makeInstance($dataProviderClass, $this->settings);
             $data = array_merge_recursive($data, $dataProvider->provide());
+        }
+
+        if (! is_array($this->additionalData)) {
+            return $data;
         }
 
         return array_merge_recursive($data, $this->additionalData);
