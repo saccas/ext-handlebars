@@ -24,5 +24,10 @@
         "visol/translationapi": "^2.0.0 || ^3.0"
     },
     "require-dev": {
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "handlebars"
+        }
     }
 }
