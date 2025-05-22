@@ -131,11 +131,6 @@ parameters:
 			path: Classes/View/HandlebarsView.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function strtolower expects string, string\\|null given\\.$#"
-			count: 3
-			path: Classes/View/HandlebarsView.php
-
-		-
 			message: "#^Parameter \\#1 \\$string of function strtolower expects string, string\\|null given\\.$#"
 			count: 3
 			path: Classes/View/HandlebarsView.php
@@ -158,4 +153,9 @@ parameters:
 		-
 			message: "#^Call to an undefined method object\\:\\:setRenderingContext\\(\\)\\.$#"
 			count: 1
+			path: Classes/ViewHelpers/RenderViewHelper.php
+
+		-
+			message: "#^Cannot access offset 'handlebars' on mixed\\.$#"
+			count: 3
 			path: Classes/ViewHelpers/RenderViewHelper.php
