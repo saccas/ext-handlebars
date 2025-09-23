@@ -1,4 +1,5 @@
 <?php
+
 namespace Visol\Handlebars;
 
 /*
@@ -17,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class HelperRegistry implements SingletonInterface
 {
-
     /**
      * @var array
      */
@@ -61,5 +61,4 @@ class HelperRegistry implements SingletonInterface
     {
         return $this->helpers;
     }
-
 }

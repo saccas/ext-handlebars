@@ -1,12 +1,13 @@
 <?php
+
 namespace Visol\Handlebars\View;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
-use Visol\Handlebars\Rendering\HandlebarsContext;
 use Visol\Handlebars\Engine\HandlebarsEngine;
+use Visol\Handlebars\Rendering\HandlebarsContext;
 
 /***************************************************************
  *  Copyright notice

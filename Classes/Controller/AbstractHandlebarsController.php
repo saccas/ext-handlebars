@@ -1,10 +1,11 @@
 <?php
+
 namespace Visol\Handlebars\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use Visol\Handlebars\Rendering\HandlebarsContext;
 use Visol\Handlebars\View\HandlebarsView;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
  *  Copyright notice

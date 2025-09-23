@@ -27,15 +27,15 @@ namespace Visol\Handlebars\Engine;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Visol\Handlebars\DataProvider\DataProviderInterface;
-use Visol\Handlebars\Exception\NoTemplateConfiguredException;
-use Visol\Handlebars\Exception\TemplateNotFoundException;
-use Visol\Handlebars\HelperRegistry;
 use LightnCandy\LightnCandy;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Visol\Handlebars\DataProvider\DataProviderInterface;
+use Visol\Handlebars\Exception\NoTemplateConfiguredException;
+use Visol\Handlebars\Exception\TemplateNotFoundException;
+use Visol\Handlebars\HelperRegistry;
 
 /**
  * Class HandlebarsEngine
@@ -122,7 +122,6 @@ class HandlebarsEngine
         $compiledCodePathAndFilename = $this->getCompiledCodePathAndFilename($templatePathAndFilename);
 
         if (!is_file($compiledCodePathAndFilename) || $this->isBackendUserOnline()) { // if we have a BE login always compile the template
-
             // Compiling to PHP Code
             $compiledCode = LightnCandy::compile($this->getTemplateCode($templatePathAndFilename), $this->getOptions());
 
@@ -241,7 +240,7 @@ class HandlebarsEngine
                 $basenameCandidate . '.hbs'
             ];
             
-            foreach($candidates as $candidate) {
+            foreach ($candidates as $candidate) {
                 $pathAndFilename = GeneralUtility::getFileAbsFileName($candidate);
                 if (is_file($pathAndFilename)) {
                     return $pathAndFilename;
@@ -281,7 +280,7 @@ class HandlebarsEngine
             $this->getDefaultHelpers(),
             HelperRegistry::getInstance()->getHelpers()
         );
-        array_walk($helpers, fn($helperFunction) => \Closure::bind($helperFunction, $this, $this));
+        array_walk($helpers, fn ($helperFunction) => \Closure::bind($helperFunction, $this, $this));
         return $helpers;
     }
 }

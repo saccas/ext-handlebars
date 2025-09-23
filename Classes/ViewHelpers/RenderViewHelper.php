@@ -2,10 +2,10 @@
 
 namespace Visol\Handlebars\ViewHelpers;
 
-use Visol\Handlebars\Rendering\HandlebarsContext;
-use Visol\Handlebars\View\HandlebarsView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use Visol\Handlebars\Rendering\HandlebarsContext;
+use Visol\Handlebars\View\HandlebarsView;
 
 /***************************************************************
  *
