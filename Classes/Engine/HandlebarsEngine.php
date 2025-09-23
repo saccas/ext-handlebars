@@ -53,7 +53,7 @@ class HandlebarsEngine
     protected ?string $partialsRootPath;
 
     protected ?string $template;
-    
+
     protected array $dataProviders;
 
     protected array $additionalData;
@@ -118,7 +118,7 @@ class HandlebarsEngine
         if (!isset($templatePathAndFilename)) {
             throw new TemplateNotFoundException($template, $this->templatesRootPath);
         }
-        
+
         $compiledCodePathAndFilename = $this->getCompiledCodePathAndFilename($templatePathAndFilename);
 
         if (!is_file($compiledCodePathAndFilename) || $this->isBackendUserOnline()) { // if we have a BE login always compile the template
@@ -210,7 +210,7 @@ class HandlebarsEngine
         if (isset($this->templatesRootPath)) {
             $candidates[] = $this->templatesRootPath . $template;
         }
-        
+
         return $this->findHbsFile($candidates);
     }
 
@@ -228,7 +228,7 @@ class HandlebarsEngine
         if (isset($this->templatesRootPath)) {
             $candidates[] = $this->templatesRootPath . $name;
         }
-        
+
         return $this->findHbsFile($candidates);
     }
 
@@ -239,7 +239,7 @@ class HandlebarsEngine
                 $basenameCandidate,
                 $basenameCandidate . '.hbs'
             ];
-            
+
             foreach ($candidates as $candidate) {
                 $pathAndFilename = GeneralUtility::getFileAbsFileName($candidate);
                 if (is_file($pathAndFilename)) {
@@ -250,7 +250,7 @@ class HandlebarsEngine
 
         return null;
     }
-    
+
     /**
      * Returns backend user online status
      */
