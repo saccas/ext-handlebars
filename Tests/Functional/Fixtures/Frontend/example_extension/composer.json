@@ -1,0 +1,20 @@
+{
+    "name": "visol/typo3-handlebars-example-extension",
+    "description": "This is an example, used for testing and showcase on how to use the Controller",
+    "type": "typo3-cms-extension",
+    "homepage": "https://www.visol.ch",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Visol\\ExampleExtension\\": "Classes/"
+        }
+    },
+    "require": {
+        "visol/typo3-handlebars": "*"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "example_extension"
+        }
+    }
+}

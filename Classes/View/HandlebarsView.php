@@ -1,12 +1,13 @@
 <?php
+
 namespace Visol\Handlebars\View;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
-use TYPO3Fluid\Fluid\View\ViewInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
-use Visol\Handlebars\Rendering\HandlebarsContext;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use Visol\Handlebars\Engine\HandlebarsEngine;
+use Visol\Handlebars\Rendering\HandlebarsContext;
 
 /***************************************************************
  *  Copyright notice
@@ -56,9 +57,9 @@ class HandlebarsView implements ViewInterface
     protected function getContextVariables(): array
     {
         return [
-            'extensionKey' => strtolower($this->renderingContext->getExtensionKey()),
-            'controllerName' => strtolower($this->renderingContext->getControllerName()),
-            'actionName' => strtolower($this->renderingContext->getActionName()),
+            'extensionKey' => strtolower($this->renderingContext->getExtensionKey() ?? ''),
+            'controllerName' => strtolower($this->renderingContext->getControllerName() ?? ''),
+            'actionName' => strtolower($this->renderingContext->getActionName() ?? ''),
         ];
     }
 
@@ -93,23 +94,5 @@ class HandlebarsView implements ViewInterface
     public function setRenderingContext(HandlebarsContext $renderingContext): void
     {
         $this->renderingContext = $renderingContext;
-    }
-
-    /**
-     * Credits: JsonView
-     */
-    public function renderSection($sectionName, array $variables = [], $ignoreUnknown = false): string
-    {
-        // No-op: renderSection does not make sense for this view
-        return '';
-    }
-
-    /**
-     * Credits: JsonView
-     */
-    public function renderPartial($partialName, $sectionName, array $variables, $ignoreUnknown = false): string
-    {
-        // No-op: renderPartial does not make sense for this view
-        return '';
     }
 }

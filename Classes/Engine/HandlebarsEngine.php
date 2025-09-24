@@ -27,15 +27,15 @@ namespace Visol\Handlebars\Engine;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Visol\Handlebars\DataProvider\DataProviderInterface;
-use Visol\Handlebars\Exception\NoTemplateConfiguredException;
-use Visol\Handlebars\Exception\TemplateNotFoundException;
-use Visol\Handlebars\HelperRegistry;
 use LightnCandy\LightnCandy;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Visol\Handlebars\DataProvider\DataProviderInterface;
+use Visol\Handlebars\Exception\NoTemplateConfiguredException;
+use Visol\Handlebars\Exception\TemplateNotFoundException;
+use Visol\Handlebars\HelperRegistry;
 
 /**
  * Class HandlebarsEngine
@@ -53,7 +53,7 @@ class HandlebarsEngine
     protected ?string $partialsRootPath;
 
     protected ?string $template;
-    
+
     protected array $dataProviders;
 
     protected array $additionalData;
@@ -71,7 +71,7 @@ class HandlebarsEngine
         $this->template = $settings['template'] ?? $settings['templatePath'] ?? null;
         $this->dataProviders = $settings['dataProviders'] ?? [];
         $this->additionalData = $settings['additionalData'] ?? [];
-        $this->tempPath = Environment::getProjectPath() . '/' . $settings['tempPath'];
+        $this->tempPath = Environment::getProjectPath() . '/' . ($settings['tempPath'] ?? '');
     }
 
     /**
@@ -118,11 +118,10 @@ class HandlebarsEngine
         if (!isset($templatePathAndFilename)) {
             throw new TemplateNotFoundException($template, $this->templatesRootPath);
         }
-        
+
         $compiledCodePathAndFilename = $this->getCompiledCodePathAndFilename($templatePathAndFilename);
 
         if (!is_file($compiledCodePathAndFilename) || $this->isBackendUserOnline()) { // if we have a BE login always compile the template
-
             // Compiling to PHP Code
             $compiledCode = LightnCandy::compile($this->getTemplateCode($templatePathAndFilename), $this->getOptions());
 
@@ -180,7 +179,7 @@ class HandlebarsEngine
     {
         $partialContent = '';
         $partialFileNameAndPath = $this->getPartialPathAndFileName($name);
-        if (file_exists($partialFileNameAndPath)) {
+        if (is_string($partialFileNameAndPath) && file_exists($partialFileNameAndPath)) {
             return file_get_contents($partialFileNameAndPath);
         }
         return $partialContent;
@@ -211,7 +210,7 @@ class HandlebarsEngine
         if (isset($this->templatesRootPath)) {
             $candidates[] = $this->templatesRootPath . $template;
         }
-        
+
         return $this->findHbsFile($candidates);
     }
 
@@ -229,7 +228,7 @@ class HandlebarsEngine
         if (isset($this->templatesRootPath)) {
             $candidates[] = $this->templatesRootPath . $name;
         }
-        
+
         return $this->findHbsFile($candidates);
     }
 
@@ -240,8 +239,8 @@ class HandlebarsEngine
                 $basenameCandidate,
                 $basenameCandidate . '.hbs'
             ];
-            
-            foreach($candidates as $candidate) {
+
+            foreach ($candidates as $candidate) {
                 $pathAndFilename = GeneralUtility::getFileAbsFileName($candidate);
                 if (is_file($pathAndFilename)) {
                     return $pathAndFilename;
@@ -251,7 +250,7 @@ class HandlebarsEngine
 
         return null;
     }
-    
+
     /**
      * Returns backend user online status
      */
@@ -281,7 +280,7 @@ class HandlebarsEngine
             $this->getDefaultHelpers(),
             HelperRegistry::getInstance()->getHelpers()
         );
-        array_walk($helpers, fn($helperFunction) => \Closure::bind($helperFunction, $this, $this));
+        array_walk($helpers, fn ($helperFunction) => \Closure::bind($helperFunction, $this, $this));
         return $helpers;
     }
 }

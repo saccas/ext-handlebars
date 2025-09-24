@@ -9,25 +9,38 @@
             "Visol\\Handlebars\\": "Classes/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Visol\\Handlebars\\Tests\\": "Tests/",
+            "Visol\\ExampleExtension\\": "Tests/Functional/Fixtures/Frontend/example_extension/Classes/"
+        }
+    },
     "require": {
-        "php": ">= 8.0 < 8.4",
+        "php": ">= 8.2 < 8.5",
         "zordius/lightncandy": "^1.2",
-        "typo3/cms-core": "^12.4",
-        "typo3/cms-extbase": "^12.4",
-        "typo3fluid/fluid": "^2.7"
+        "typo3/cms-core": "^13.4",
+        "typo3/cms-extbase": "^13.4",
+        "typo3fluid/fluid": "^4.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.10"
+        "typo3/testing-framework": "^8.0",
+        "symplify/easy-coding-standard": "^12.3",
+        "phpstan/extension-installer": "^1.4",
+        "saschaegerer/phpstan-typo3": "^1.10",
+        "typo3/cms-fluid-styled-content": "^13.4"
     },
     "extra": {
         "typo3/cms": {
-            "extension-key": "handlebars"
+            "extension-key": "handlebars",
+            "web-dir": ".Build/web"
         }
     },
     "config": {
+        "lock": false,
         "allow-plugins": {
             "typo3/class-alias-loader": true,
-            "typo3/cms-composer-installers": true
+            "typo3/cms-composer-installers": true,
+            "phpstan/extension-installer": true
         }
     }
 }

@@ -1,8 +1,11 @@
 <?php
+
 namespace Visol\Handlebars\Controller;
 
-use Visol\Handlebars\View\HandlebarsView;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Visol\Handlebars\Rendering\HandlebarsContext;
+use Visol\Handlebars\View\HandlebarsView;
 
 /***************************************************************
  *  Copyright notice
@@ -33,16 +36,15 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 abstract class AbstractHandlebarsController extends ActionController
 {
-
     /** @var HandlebarsView */
     protected $view;
 
-    /**
-     * The default view object to use if none of the resolved views can render
-     * a response for the current request.
-     *
-     * @var string
-     * @api
-     */
-    protected $defaultViewObjectName = HandlebarsView::class;
+    protected function resolveView(): HandlebarsView
+    {
+        $view = GeneralUtility::makeInstance(HandlebarsView::class);
+        $view->assign('settings', $this->settings);
+        $view->setRenderingContext(new HandlebarsContext($this->request));
+
+        return $view;
+    }
 }
