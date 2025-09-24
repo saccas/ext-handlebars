@@ -71,7 +71,7 @@ class HandlebarsEngine
         $this->template = $settings['template'] ?? $settings['templatePath'] ?? null;
         $this->dataProviders = $settings['dataProviders'] ?? [];
         $this->additionalData = $settings['additionalData'] ?? [];
-        $this->tempPath = Environment::getProjectPath() . '/' . $settings['tempPath'];
+        $this->tempPath = Environment::getProjectPath() . '/' . ($settings['tempPath'] ?? '');
     }
 
     /**
@@ -179,7 +179,7 @@ class HandlebarsEngine
     {
         $partialContent = '';
         $partialFileNameAndPath = $this->getPartialPathAndFileName($name);
-        if (file_exists($partialFileNameAndPath)) {
+        if (is_string($partialFileNameAndPath) && file_exists($partialFileNameAndPath)) {
             return file_get_contents($partialFileNameAndPath);
         }
         return $partialContent;

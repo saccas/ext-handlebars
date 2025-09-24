@@ -32,13 +32,9 @@ namespace Visol\Handlebars\DataProvider;
  */
 abstract class AbstractDataProvider implements DataProviderInterface
 {
-    /**
-     * @var array
-     */
-    protected $settings;
+    protected array $settings;
 
-
-    public function __construct($settings)
+    public function __construct(array $settings)
     {
         $this->settings = $settings;
     }

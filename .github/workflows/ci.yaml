@@ -127,7 +127,7 @@ jobs:
         run: composer require --no-progress --no-interaction --optimize-autoloader "typo3/cms-core:${{ matrix.typo3-version }}"
 
       - name: PHPUnit Tests
-        run: ./vendor/bin/phpunit --testdox --coverage-cobertura coverage/coverage.cobertura.xml
+        run: ./vendor/bin/phpunit --testdox --display-all-issues --coverage-cobertura coverage/coverage.cobertura.xml
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0

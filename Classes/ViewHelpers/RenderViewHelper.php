@@ -2,6 +2,7 @@
 
 namespace Visol\Handlebars\ViewHelpers;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use Visol\Handlebars\Rendering\HandlebarsContext;
@@ -70,17 +71,17 @@ class RenderViewHelper extends AbstractViewHelper
         $this->registerArgument('settings', 'array', '', false, []);
         $this->registerArgument('data', 'array', '', false, []);
     }
-    
+
     public function render(): string
     {
         $template = $this->arguments['template'];
         $settings = $this->arguments['settings'];
         $data = $this->arguments['data'];
-        
+
         $handlebarsView = GeneralUtility::makeInstance(HandlebarsView::class);
         $handlebarsRenderingContext = GeneralUtility::makeInstance(
             HandlebarsContext::class,
-            $this->renderingContext->getRequest()
+            $this->renderingContext->getAttribute(ServerRequestInterface::class)
         );
         $handlebarsView->setRenderingContext($handlebarsRenderingContext);
 
@@ -89,9 +90,9 @@ class RenderViewHelper extends AbstractViewHelper
         } else {
             $settings = [];
         }
- 
+
         $settings = array_replace_recursive($settings, [
-            'templatesRootPath' => $settings['templatesRootPath'],
+            'templatesRootPath' => $settings['templatesRootPath'] ?? null,
             'template' => $template,
             'additionalData' => $data
         ]);

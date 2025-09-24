@@ -57,9 +57,9 @@ class HandlebarsView implements ViewInterface
     protected function getContextVariables(): array
     {
         return [
-            'extensionKey' => strtolower($this->renderingContext->getExtensionKey()),
-            'controllerName' => strtolower($this->renderingContext->getControllerName()),
-            'actionName' => strtolower($this->renderingContext->getActionName()),
+            'extensionKey' => strtolower($this->renderingContext->getExtensionKey() ?? ''),
+            'controllerName' => strtolower($this->renderingContext->getControllerName() ?? ''),
+            'actionName' => strtolower($this->renderingContext->getActionName() ?? ''),
         ];
     }
 
