@@ -1,4 +1,5 @@
 <?php
+
 namespace Visol\Handlebars\DataProvider;
 
 /***************************************************************
@@ -28,13 +29,15 @@ namespace Visol\Handlebars\DataProvider;
 
 class TyposcriptDataProvider extends AbstractDataProvider
 {
-    /**
-     * Entry point
-     *
-     * @return array
-     */
     public function provide()
     {
-        return is_array($this->settings['variables']) ? $this->settings['variables'] : [];
+        if (
+            array_key_exists('variables', $this->settings)
+            && is_array($this->settings['variables'])
+        ) {
+            return $this->settings['variables'];
+        }
+
+        return [];
     }
 }

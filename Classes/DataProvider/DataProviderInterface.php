@@ -32,10 +32,8 @@ namespace Visol\Handlebars\DataProvider;
  */
 interface DataProviderInterface
 {
-
     /**
      * @return array
      */
     public function provide();
-
 }
